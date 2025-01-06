@@ -6,21 +6,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\UuidTrait;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UuidTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
+
+    // UUID primary key
+    protected $keyType = 'string';
+    protected $primaryKey = 'global_id';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'status',
     ];
 
     /**
